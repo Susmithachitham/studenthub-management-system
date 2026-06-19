@@ -205,13 +205,13 @@ def add_student():
         )
         """,
         (
-            student_id,
-            data["name"],
-            data["email"],
-            data["course"],
-            data["age"],
-            data["phone"]
-        )
+    student_id,
+    data["name"],
+    data["email"],
+    data["course"],
+    data.get("age", 0),
+    data.get("phone", "")
+)
     )
 
     db.commit()
