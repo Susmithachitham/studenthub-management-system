@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>StudentHub</title>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<!-- TOAST -->
+
+<div id="toast"
+class="toast">
+
+</div>
+
+<!-- MODAL -->
+
+<div id="studentModal"
+class="modal">
+
+    <div class="modal-content">
+
+        <span
+        class="close"
+        onclick="closeModal()">
+
+        &times;
+
+        </span>
+
+        <div id="modalBody">
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        🎓 StudentHub
+    </div>
+
+    <ul class="menu">
+
+        <li onclick="showDashboard()">
+            Dashboard
+        </li>
+
+        <li onclick="showForm()">
+            Add Student
+        </li>
+
+        <li onclick="showStudents()">
+            Student List
+        </li>
+
+    </ul>
+
+    <div class="menu-container">
+
+        <button
+        class="menu-btn"
+        onclick="toggleMenu()">
+
+        ⋮
+
+        </button>
+
+        <div
+        id="dropdownMenu"
+        class="dropdown-menu">
+
+            <a href="#"
+            onclick="toggleDarkMode()">
+
+            🌙 Toggle Theme
+
+            </a>
+
+            <a href="#"
+            onclick="showDashboard()">
+
+            📊 Dashboard
+
+            </a>
+
+            <a href="#"
+            onclick="showStudents()">
+
+            📋 Students
+
+            </a>
+
+            <a href="/logout">
+
+            🚪 Logout
+
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+<div class="welcome-banner">
+
+    ✨ Welcome to StudentHub —
+    Modern Student Management Dashboard
+
+</div>
+
+<!-- CONTAINER -->
+
+<div class="container">
+
+    <!-- DASHBOARD -->
+
+    <section id="dashboardSection">
+
+    <!-- HERO -->
+
+    <div class="hero">
+
+        <div>
+
+            <h1>
+                Student Management Portal
+            </h1>
+
+            <p>
+                Manage students efficiently,
+                track courses and monitor
+                growth through analytics.
+            </p>
+
+        </div>
+
+        <div class="profile-card">
+
+            <h3>
+                👤 Admin
+            </h3>
+
+            <p>
+                Welcome Back
+            </p>
+
+            <span id="todayDate">
+            </span>
+
+        </div>
+
+    </div>
+
+    <!-- TOP WIDGETS -->
+
+    <div class="dashboard-widgets">
+
+        <div class="clock-card">
+
+            <h3>
+                📅 Date & Time
+            </h3>
+
+            <h2 id="liveTime">
+                --
+            </h2>
+
+            <p id="liveDate">
+                --
+            </p>
+
+        </div>
+
+        <div class="export-card">
+
+            <h3>
+                📤 Export Report
+            </h3>
+
+            <p>
+                Download Student Report
+            </p>
+
+           <button
+onclick="exportPDF()">
+
+            Download PDF
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- STATS -->
+
+    <div class="stats">
+
+        <div class="stat-card">
+
+            <h3>
+                👨‍🎓 Total Students
+            </h3>
+
+            <span id="totalStudents">
+                0
+            </span>
+
+        </div>
+
+        <div class="stat-card">
+
+            <h3>
+                📚 Total Courses
+            </h3>
+
+            <span id="totalCourses">
+                0
+            </span>
+
+        </div>
+
+    </div>
+
+    <!-- QUICK ACTIONS -->
+
+    <div class="quick-actions">
+
+        <button
+        onclick="showForm()">
+
+        ➕ Add Student
+
+        </button>
+
+        <button
+        onclick="showStudents()">
+
+        📋 View Students
+
+        </button>
+
+    </div>
+
+    <!-- CHART -->
+
+    <div class="chart-card">
+
+        <h2>
+
+            📊 Course Distribution
+
+        </h2>
+
+        <canvas
+        id="courseChart">
+
+        </canvas>
+
+    </div>
+
+    <!-- RECENT -->
+
+    <div class="recent-section">
+
+        <h2>
+
+            🕒 Recent Students
+
+        </h2>
+
+        <div id="recentStudents">
+
+        </div>
+
+    </div>
+
+</section>
+
+    <!-- FORM -->
+
+    <section id="formSection">
+
+        <div class="form-container">
+
+            <h2>
+
+                Add Student
+
+            </h2>
+
+            <input
+            type="text"
+            id="name"
+            placeholder="Student Name">
+
+            <input
+            type="email"
+            id="email"
+            placeholder="Email">
+
+            <input
+            type="text"
+            id="course"
+            placeholder="Course">
+
+            <input
+            type="number"
+            id="age"
+            placeholder="Age">
+
+            <input
+            type="text"
+            id="phone"
+            placeholder="Phone Number">
+
+            <button
+            onclick="addStudent()">
+
+            Save Student
+
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- STUDENTS -->
+
+    <section id="studentSection">
+
+        <div class="search-container">
+
+            <input
+            type="text"
+            id="search"
+            placeholder="🔍 Search Students"
+            onkeyup="searchStudents()">
+
+        </div>
+
+        <div
+        id="students"
+        class="student-grid">
+
+        </div>
+
+    </section>
+
+</div>
+
+<!-- CHART JS -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script
+src="{{ url_for('static', filename='script.js') }}">
+</script>
+
+</body>
+
+</html>

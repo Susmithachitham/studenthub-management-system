@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+venv/
+.env
+students_report.pdf

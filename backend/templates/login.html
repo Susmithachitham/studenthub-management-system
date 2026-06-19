@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>StudentHub Login</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+
+height:100vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+background:
+linear-gradient(
+135deg,
+#6366f1,
+#8b5cf6,
+#ec4899
+);
+
+}
+
+.login-box{
+
+width:400px;
+
+background:white;
+
+padding:40px;
+
+border-radius:25px;
+
+box-shadow:
+0 15px 40px rgba(
+0,
+0,
+0,
+.2
+);
+
+}
+
+.logo{
+
+text-align:center;
+
+font-size:32px;
+
+font-weight:700;
+
+color:#6366f1;
+
+margin-bottom:25px;
+
+}
+
+.login-box h2{
+
+text-align:center;
+
+margin-bottom:25px;
+
+color:#1e293b;
+
+}
+
+input{
+
+width:100%;
+
+padding:15px;
+
+margin-bottom:15px;
+
+border:2px solid #e2e8f0;
+
+border-radius:12px;
+
+outline:none;
+
+font-size:15px;
+
+}
+
+input:focus{
+
+border-color:#6366f1;
+
+}
+
+button{
+
+width:100%;
+
+padding:15px;
+
+border:none;
+
+border-radius:12px;
+
+cursor:pointer;
+
+font-size:16px;
+
+font-weight:600;
+
+background:
+linear-gradient(
+135deg,
+#6366f1,
+#8b5cf6
+);
+
+color:white;
+
+}
+
+button:hover{
+
+opacity:.9;
+
+}
+
+.register-link{
+
+text-align:center;
+
+margin-top:20px;
+
+}
+
+.register-link a{
+
+color:#6366f1;
+
+text-decoration:none;
+
+font-weight:600;
+
+}
+
+.toast{
+
+position:fixed;
+
+top:20px;
+
+right:20px;
+
+background:#10b981;
+
+color:white;
+
+padding:15px 20px;
+
+border-radius:10px;
+
+display:none;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="toast"
+id="toast">
+
+</div>
+
+<div class="login-box">
+
+<div class="logo">
+
+🎓 StudentHub
+
+</div>
+
+<h2>
+
+Login
+
+</h2>
+
+<input
+type="email"
+id="email"
+placeholder="Email">
+
+<input
+type="password"
+id="password"
+placeholder="Password">
+
+<button
+onclick="login()">
+
+Login
+
+</button>
+
+<div class="register-link">
+
+Don't have an account?
+
+<a href="/register-page">
+
+Register
+
+</a>
+
+</div>
+
+</div>
+
+<script>
+
+function showToast(message){
+
+const toast =
+document.getElementById(
+"toast"
+);
+
+toast.innerText =
+message;
+
+toast.style.display =
+"block";
+
+setTimeout(() => {
+
+toast.style.display =
+"none";
+
+},3000);
+
+}
+
+async function login(){
+
+const email =
+document.getElementById(
+"email"
+).value;
+
+const password =
+document.getElementById(
+"password"
+).value;
+
+const response =
+await fetch(
+"/login",
+{
+method:"POST",
+
+headers:{
+"Content-Type":
+"application/json"
+},
+
+body:JSON.stringify({
+
+email,
+password
+
+})
+}
+);
+
+const data =
+await response.json();
+
+if(data.success){
+
+showToast(
+"Login Successful"
+);
+
+setTimeout(()=>{
+
+window.location =
+"/dashboard";
+
+},1000);
+
+}else{
+
+showToast(
+"Invalid Credentials"
+);
+
+}
+
+}
+
+</script>
+
+</body>
+
+</html>

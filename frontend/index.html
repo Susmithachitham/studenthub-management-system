@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <h1>🎓 StudentHub</h1>
+    </nav>
+
+    <div class="container">
+
+        <!-- Dashboard -->
+
+        <div class="dashboard">
+
+            <div class="card">
+                <h3>Total Students</h3>
+                <p id="totalStudents">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Courses</h3>
+                <p id="totalCourses">0</p>
+            </div>
+
+        </div>
+
+        <!-- Search -->
+
+        <div class="search-box">
+            <input
+                type="text"
+                id="search"
+                placeholder="🔍 Search Student..."
+                onkeyup="searchStudents()"
+            >
+        </div>
+
+        <!-- Form -->
+
+        <div class="form-container">
+
+            <h2>Add Student</h2>
+
+            <input type="text" id="name" placeholder="Student Name">
+
+            <input type="email" id="email" placeholder="Email">
+
+            <input type="text" id="course" placeholder="Course">
+
+            <button onclick="addStudent()">
+                Save Student
+            </button>
+
+        </div>
+
+        <!-- Students -->
+
+        <div id="students" class="student-grid">
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
