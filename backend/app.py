@@ -34,7 +34,7 @@ app.secret_key = "studenthub_secret"
 CORS(
     app,
     origins=[
-        "https://your-vercel-app.vercel.app"
+        "https://studenthub-management-system.vercel.app"
     ]
 )
 # ==========================
