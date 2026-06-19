@@ -1,4 +1,4 @@
-const API = "http://127.0.0.1:5000/students";
+const API = "http://127.0.0.1:studenthub-management-system-production.up.railway.app/students";
 let editId = null;
 async function addStudent(){
 
