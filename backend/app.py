@@ -43,8 +43,7 @@ CORS(
 
 db = mysql.connector.connect(
     host=os.environ.get("MYSQLHOST"),
-    port=int(os.environ.get("MYSQLPORT")),
-    user=os.environ.get("MYSQLUSER"),
+port=int(os.environ.get("MYSQLPORT", 3306))    user=os.environ.get("MYSQLUSER"),
     password=os.environ.get("MYSQLPASSWORD"),
     database=os.environ.get("MYSQLDATABASE")
 )
