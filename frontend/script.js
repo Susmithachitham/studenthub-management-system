@@ -1,5 +1,11 @@
-const API = "http://127.0.0.1:studenthub-management-system-production.up.railway.app/students";
+const BASE_URL =
+"https://studenthub-studenthub-management-system-production.up.railway.app-system-production.up.railway.app";
 let editId = null;
+
+fetch(`${BASE_URL}/students`)
+fetch(`${BASE_URL}/course-chart`)
+fetch(`${BASE_URL}/export-pdf`)
+
 async function addStudent(){
 
     const name =
