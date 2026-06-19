@@ -7,6 +7,9 @@ from flask import (
     session,
     send_file
 )
+from dotenv import load_dotenv
+
+load_dotenv()
 
 from flask_cors import CORS
 import mysql.connector
@@ -28,18 +31,22 @@ app = Flask(__name__)
 
 app.secret_key = "studenthub_secret"
 
-CORS(app)
-
+CORS(
+    app,
+    origins=[
+        "https://your-vercel-app.vercel.app"
+    ]
+)
 # ==========================
 # DATABASE
 # ==========================
 
 db = mysql.connector.connect(
-    host="localhost",
-    port=3307,
-    user="root",
-    password="yourpassword",
-    database="student_db"
+    host=os.environ.get("MYSQLHOST"),
+    port=int(os.environ.get("MYSQLPORT")),
+    user=os.environ.get("MYSQLUSER"),
+    password=os.environ.get("MYSQLPASSWORD"),
+    database=os.environ.get("MYSQLDATABASE")
 )
 
 cursor = db.cursor(dictionary=True)
@@ -414,7 +421,12 @@ def export_pdf():
 # ==========================
 
 if __name__ == "__main__":
-
     app.run(
-        debug=True
+        host="0.0.0.0",
+        port=int(
+            os.environ.get(
+                "PORT",
+                10000
+            )
+        )
     )
