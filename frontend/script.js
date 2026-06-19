@@ -1,10 +1,7 @@
-const BASE_URL =
-"https://studenthub-studenthub-management-system-production.up.railway.app-system-production.up.railway.app";
+const API =
+"https://studenthub-management-system-production.up.railway.app/students";
 let editId = null;
 
-fetch(`${BASE_URL}/students`)
-fetch(`${BASE_URL}/course-chart`)
-fetch(`${BASE_URL}/export-pdf`)
 
 async function addStudent(){
 
